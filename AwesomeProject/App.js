@@ -1,31 +1,27 @@
-import React, {Component, useState} from 'react';
-import {Text, View, Button} from 'react-native';
+import React, {useState} from 'react';
+import {View, TextInput, Text} from 'react-native';
 
-const Cat = (props) => {
-  const [isHungry, setIsHungry] = useState(true);
+const App = () => {
+  var [text, setText] = useState('');
+
+  const onHandleChangeText = (textInput) => {
+    setText('🍕'.repeat(textInput.trim().split(' ').length));
+  };
+
   return (
-    <View>
-      <Text>My name is {props.name}</Text>
-      <Button
-        onPress={() => {
-          setIsHungry(false);
+    <View style={{padding: 30}}>
+      <TextInput
+        placeholder="Enter text"
+        onChangeText={(text) => onHandleChangeText(text)}
+        style={{
+          borderBottomWidth: 1,
+          paddingBottom: 1,
+          borderBottomColor: '#cccccc',
         }}
-        disabled={!isHungry}
-        title={isHungry ? 'Feel Cat' : 'Full'}
       />
+      <Text>{text}</Text>
     </View>
   );
 };
-
-class App extends Component {
-  render() {
-    return (
-      <View>
-        <Cat name="Bob" />
-        <Cat name="Vui" />
-      </View>
-    );
-  }
-}
 
 export default App;
